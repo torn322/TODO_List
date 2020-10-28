@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react' 
+import {List as TodoLists} from './todo_lists/list.jsx' 
+import Sorting from './todo_lists/sorting'
+import {Add as AddList} from './todo_lists/add'
+import Todo from './todo/todo'
+import {Add as AddItem} from './todo/add'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <div className="todo-lists">
+          <div className="todo-lists__sorting">
+            <Sorting />
+          </div>
+          <TodoLists/>
+          <div className="todo-lists__add">
+            <AddList />
+          </div>
+        </div>
+        <div className="todo">
+            <Todo />
+          <div className="todo__add">
+            <AddItem />
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
