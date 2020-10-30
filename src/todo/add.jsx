@@ -5,8 +5,11 @@ class Add extends React.Component {
         return (
             <form action="/">
                 <input type="text" name="listName"/>
-                <input type="checkbox" name="isUrgently" id=""/>
-                <label htmlFor="isUrgently">Urgently</label>
+                <label className="custom-checkbox">
+                    <input type="checkbox" name="is-urgently"/>
+                    <span></span>
+                    <label htmlFor="is-urgently">Urgently</label>
+                </label>
                 <button type="submit" className="btn">Add</button>
             </form>
         )

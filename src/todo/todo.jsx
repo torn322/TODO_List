@@ -1,4 +1,6 @@
 import React from 'react'
+import Item from './item'
+
 
 class Todo extends React.Component {
     render () {
@@ -6,21 +8,10 @@ class Todo extends React.Component {
             <div>
                 <h2>Random List Name</h2>
                 <ul className="todo__list">
-                    <li className="todo__item">
-                        <input className="todo__is-done" type="checkbox" name="done"/>
-                        <span className="todo__text">Make some stuff</span>
-                        <span className="todo__date">12.10.2020</span>
-                    </li>
-                    <li className="todo__item">
-                        <input className="todo__is-done" type="checkbox" name="done"/>
-                        <span className="todo__text">Make some stuff</span>
-                        <span className="todo__date">12.10.2020</span>
-                    </li>
-                    <li className="todo__item">
-                        <input className="todo__is-done" type="checkbox" name="done"/>
-                        <span className="todo__text">Make some stuff</span>
-                        <span className="todo__date">12.10.2020</span>
-                    </li>
+                    <Item />
+                    <Item />
+                    <Item />
+                    
                 </ul>
             </div>
         ) 

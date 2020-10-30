@@ -8,19 +8,19 @@ import {Add as AddItem} from './todo/add'
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <div className="todo-lists">
-          <div className="todo-lists__sorting">
+          <div className="todo-lists__sorting settings-bar">
             <Sorting />
           </div>
           <TodoLists/>
-          <div className="todo-lists__add">
+          <div className="todo-lists__add settings-bar">
             <AddList />
           </div>
         </div>
         <div className="todo">
             <Todo />
-          <div className="todo__add">
+          <div className="todo__add settings-bar">
             <AddItem />
           </div>
         </div>
