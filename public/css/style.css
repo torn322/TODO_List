@@ -112,16 +112,7 @@ h2::after {
           transform: scale(1.2);
 }
 
-.settings-bar {
-  width: 100%;
-  padding: 30px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-          box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-}
-
-.settings-bar input[type="text"] {
+input[type="text"], input[type="password"] {
   width: 300px;
   background-color: #5A5A5A;
   outline: none;
@@ -132,6 +123,15 @@ h2::after {
   font-size: 20px;
   border-radius: 999px;
   color: #fff;
+}
+
+.settings-bar {
+  width: 100%;
+  padding: 30px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
 }
 
 .todo-lists {
@@ -286,5 +286,19 @@ h2::after {
 
 .todo__add form input[type="text"] {
   width: 535px;
+}
+
+.login {
+  margin: 300px auto;
+}
+
+.login input {
+  display: block;
+  margin: 20px 0;
+}
+
+.login button {
+  margin: 0 auto;
+  display: block;
 }
 /*# sourceMappingURL=style.css.map */
