@@ -1,8 +1,8 @@
 import React from 'react' 
 import { connect } from 'react-redux'
-import {List as TodoLists} from '../todo_lists/list.jsx' 
+import TodoLists from '../todo_lists/list.jsx' 
 import Sorting from '../todo_lists/sorting'
-import {Add as AddList} from '../todo_lists/add'
+import AddList from '../todo_lists/add'
 import Todo from '../todo/todo'
 import {Add as AddItem} from '../todo/add'
 import Login from '../login/Login'
@@ -11,14 +11,14 @@ import { login } from '../actions/login'
 class App extends React.Component {
   render() {
     const { loginAction } = this.props
-    if (this.props.user.userId)
+    if (localStorage.getItem('user'))
       return (
         <div className="wrapper">
           <div className="todo-lists">
             <div className="todo-lists__sorting settings-bar">
               <Sorting />
             </div>
-            <TodoLists/>
+            <TodoLists />
             <div className="todo-lists__add settings-bar">
               <AddList />
             </div>
@@ -42,7 +42,7 @@ class App extends React.Component {
 
 
 const mapStateToProps = store => {
-  console.log(store) 
+  // console.log(store) 
   return {
     user: store.user,
   }

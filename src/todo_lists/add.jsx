@@ -1,14 +1,41 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import {addList} from '../actions/todoLists'
 
-class Add extends React.Component {
+class AddList extends React.Component {
+    listName = React.createRef()
+
+    submit = (e) => {
+        e.preventDefault()
+        this.props.addListAction(this.listName.current.value)
+    }
+
     render () {
         return (
-            <form action="/">
-                <input type="text" name="listName"/>
+            <form onSubmit={this.submit}>
+                <input type="text" name="listName" ref={this.listName}/>
                 <button type="submit" className="btn">Add</button>
             </form>
         )
-    }
+    } 
 }
 
-export { Add } 
+
+const mapStateToProps = store => {
+    return {
+      user: store.user,
+    }
+  }
+  
+const mapDispatchToProps = dispatch => {
+    return {
+      addListAction: (name) => dispatch(addList(name))
+    }
+  }
+  
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+    )(AddList)
+
+// export { Add } 

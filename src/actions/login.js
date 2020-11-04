@@ -16,13 +16,13 @@ export function login(login, pass) {
             querySnapshot.forEach(documentSnapshot => {
               if (documentSnapshot.data().pass == pass) {
                 userId = documentSnapshot.id
-                console.log(userId)
               }
             });
           });
 
     
         if (userId) {
+            localStorage.setItem('user', userId)
             dispatch({
                 type: 'LOGIN_SUCCESS',
                 payload: userId

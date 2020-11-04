@@ -187,7 +187,7 @@ input[type="text"], input[type="password"] {
           transform: scale(1.05);
 }
 
-.todo-lists__item_ended {
+.todo-lists__item_done {
   opacity: .3;
 }
 
