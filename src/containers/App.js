@@ -4,7 +4,7 @@ import TodoLists from '../todo_lists/list.jsx'
 import Sorting from '../todo_lists/sorting'
 import AddList from '../todo_lists/add'
 import Todo from '../todo/todo'
-import {Add as AddItem} from '../todo/add'
+import AddTodo from '../todo/add'
 import Login from '../login/Login'
 import { login } from '../actions/login'
 
@@ -23,12 +23,13 @@ class App extends React.Component {
               <AddList />
             </div>
           </div>
-          <div className="todo">
-              <Todo />
-            <div className="todo__add settings-bar">
-              <AddItem />
-            </div>
-          </div>
+          {this.props.todo.currentList ? 
+            <div className="todo">
+              <Todo /> 
+              <div className="todo__add settings-bar">
+                <AddTodo />
+              </div> 
+            </div> : ''}
         </div>
       )
     else
@@ -45,6 +46,7 @@ const mapStateToProps = store => {
   // console.log(store) 
   return {
     user: store.user,
+    todo: store.todo
   }
 }
 

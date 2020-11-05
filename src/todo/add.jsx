@@ -1,12 +1,32 @@
 import React from 'react' 
+import { connect } from 'react-redux'
+import { addTodo } from '../actions/todo'
 
-class Add extends React.Component {
+
+
+class AddTodo extends React.Component {
+
+    nameRef = React.createRef()
+    isUrgentlyRef = React.createRef()
+
+    submitHandler = (e) => {
+        e.preventDefault()
+
+        this.props.addTodoAction({
+            isUrgently: this.isUrgentlyRef.current.checked,
+            parrentList: this.props.todo.currentList,
+            name: this.nameRef.current.value,
+            date: new Date()
+        })
+
+    }
+
     render () {
         return (
-            <form action="/">
-                <input type="text" name="listName"/>
+            <form onSubmit={this.submitHandler}>
+                <input ref={this.nameRef} type="text"/>
                 <label className="custom-checkbox">
-                    <input type="checkbox" name="is-urgently"/>
+                    <input ref={this.isUrgentlyRef} type="checkbox" name="is-urgently"/>
                     <span></span>
                     <label htmlFor="is-urgently">Urgently</label>
                 </label>
@@ -16,4 +36,21 @@ class Add extends React.Component {
     }
 }
 
-export {Add}
+const mapStateToProps = store => {
+    return {
+      todo: store.todo
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      addTodoAction: todo => dispatch(addTodo(todo))
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+    )(AddTodo)
+
+// export {Add}
