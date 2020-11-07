@@ -19,12 +19,15 @@ class AddTodo extends React.Component {
             date: new Date()
         })
 
+        this.nameRef.current.value = ''
+        this.isUrgentlyRef.current.checked = false
+
     }
 
     render () {
         return (
             <form onSubmit={this.submitHandler}>
-                <input ref={this.nameRef} type="text"/>
+                <input required ref={this.nameRef} type="text"/>
                 <label className="custom-checkbox">
                     <input ref={this.isUrgentlyRef} type="checkbox" name="is-urgently"/>
                     <span></span>

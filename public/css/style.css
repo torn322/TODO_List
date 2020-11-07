@@ -301,4 +301,24 @@ input[type="text"], input[type="password"] {
   margin: 0 auto;
   display: block;
 }
+
+.logout {
+  font-size: 14px;
+  position: absolute;
+  color: #ffffff;
+}
+
+.err {
+  text-align: center;
+  color: #fd6a6a;
+}
+
+.signup {
+  color: #fff;
+  display: block;
+  margin: 20px auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
 /*# sourceMappingURL=style.css.map */

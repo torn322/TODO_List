@@ -3,10 +3,6 @@ import firebase from '../firebase'
 
 export function login(login, pass) {
     return async dispatch => {
-        // dispatch({
-        //     type: 'LOGIN_REQUEST',
-        //     payload: null
-        // })
 
         const db = firebase.firestore()
     
@@ -20,8 +16,8 @@ export function login(login, pass) {
             });
           });
 
-    
-        if (userId) {
+          
+          if (userId) {
             localStorage.setItem('user', userId)
             dispatch({
                 type: 'LOGIN_SUCCESS',
@@ -30,8 +26,46 @@ export function login(login, pass) {
         } else {
             dispatch({
                 type: 'LOGIN_ERROR',
-                payload: null
+                payload: 'Login or password is incorrect'
             })
         }
     }
+}
+
+export function signUp(userName, pass) {
+    return async dispatch => {
+        const db = firebase.firestore()
+
+        await db.collection('user').where('name', '==', userName).get().then(querySnapshot => {
+            if (function () {
+                let doc = null
+                querySnapshot.forEach(documentSnapshot => {
+                    doc = documentSnapshot
+                })
+                return doc
+            }()) {
+                dispatch({
+                    type: 'SIGNUP_ERROR',
+                    payload: 'Name ' + userName + ' already exist'
+                })
+            } else {
+                db.collection('user').doc().set({
+                    name: userName,
+                    pass: pass
+                }).then(() => {
+                    dispatch(login(userName, pass))
+                })
+            }
+
+          });
+
+    }
+}
+
+export function logout() {
+    localStorage.setItem('user', null)
+    return ({
+        type: 'LOGOUT',
+        payload: null
+    })
 }

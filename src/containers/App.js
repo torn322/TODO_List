@@ -6,16 +6,18 @@ import AddList from '../todo_lists/add'
 import Todo from '../todo/todo'
 import AddTodo from '../todo/add'
 import Login from '../login/Login'
-import { login } from '../actions/login'
+import Logout from '../login/logout'
+import { login, signUp } from '../actions/login'
 
 class App extends React.Component {
   render() {
-    const { loginAction } = this.props
-    if (localStorage.getItem('user'))
+    const { loginAction, signUpAction } = this.props
+    if (localStorage.getItem('user') != 'null')
       return (
         <div className="wrapper">
           <div className="todo-lists">
             <div className="todo-lists__sorting settings-bar">
+              <Logout />
               <Sorting />
             </div>
             <TodoLists />
@@ -35,7 +37,7 @@ class App extends React.Component {
     else
       return (
         <div className="wrapper">
-          <Login login={loginAction}/>
+          <Login login={loginAction} signUpAction={signUpAction} err={this.props.user.err}/>
         </div>
       )
   }
@@ -43,7 +45,6 @@ class App extends React.Component {
 
 
 const mapStateToProps = store => {
-  // console.log(store) 
   return {
     user: store.user,
     todo: store.todo
@@ -52,7 +53,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginAction: (userName, pass) => dispatch(login(userName, pass))
+    loginAction: (userName, pass) => dispatch(login(userName, pass)),
+    signUpAction: (userName, pass) => dispatch(signUp(userName, pass))
   }
 }
 

@@ -8,12 +8,13 @@ class AddList extends React.Component {
     submit = (e) => {
         e.preventDefault()
         this.props.addListAction(this.listName.current.value)
+        this.listName.current.value = ''
     }
 
     render () {
         return (
             <form onSubmit={this.submit}>
-                <input type="text" name="listName" ref={this.listName}/>
+                <input required type="text" name="listName" ref={this.listName}/>
                 <button type="submit" className="btn">Add</button>
             </form>
         )

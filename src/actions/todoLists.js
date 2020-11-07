@@ -1,33 +1,69 @@
 import firebase from '../firebase'
 
-export function show (userId) {
+export function show(userId) {
     return async dispatch => {
         const db = firebase.firestore()
         let lists = []
 
         await db.collection('todoLists').where('userId', '==', userId).get().then(querySnapshot => {
-            querySnapshot.forEach(documentSnapshot => {
+            querySnapshot.forEach(async documentSnapshot => {
+
                 lists.push(documentSnapshot.data())
                 lists[lists.length - 1].id = documentSnapshot.id
 
-                lists.sort((a, b) => {
-                    const A = a.name.toLowerCase()
-                    const B = b.name.toLowerCase()
+                let isDone = true
+                await db.collection('todo').where('listId', '==', lists[lists.length - 1].id).get().then((querySnapshot) => {
+                    querySnapshot.forEach(doc => {
 
-                    if (A < B) {
-                        return -1
-                    } else if (A > B) {
-                        return 1
-                    } else return 0
-
+                        if (doc.data().isDone) {
+                            console.log('suka')
+                            isDone = false
+                        }
+                    })
+                    lists[lists.length - 1].isDone= isDone
                 })
-            })
-        })
+                
+                
 
-        dispatch({
-            type: 'SHOW',
-            payload: lists
+            })
+
+            // lists.forEach(item => {
+            //     let isDone = true
+
+            //     db.collection('todo').where('listId', '==', item.id).get().then((querySnapshot) => {
+            //         querySnapshot.forEach(doc => {
+
+            //             if (doc.data().isDone) {
+            //                 console.log('suka')
+            //                 isDone = false
+            //             }
+            //         })
+            //         item.isDone = isDone
+            //     })
+
+            // })
+
+            lists.sort((a, b) => {
+                const A = a.name.toLowerCase()
+                const B = b.name.toLowerCase()
+
+                if (A < B) {
+                    return -1
+                } else if (A > B) {
+                    return 1
+                } else return 0
+
+            })
+            console.error(lists)
         })
+                dispatch({
+                    type: 'SHOW',
+                    payload: lists
+                })
+
+
+
+
     }
 }
 
@@ -39,10 +75,10 @@ export function deleteList(listId) {
             await db.collection('todoLists').doc(listId).get().then(doc => {
                 doc.ref.delete().then(() => {
                     dispatch(show(localStorage.getItem('user')))
-    
+
                 })
             })
-        } 
+        }
     }
 }
 
